@@ -1,6 +1,6 @@
 import pandas as pd
 
-jobs_dataset = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/eures_jobs_full.csv'
+jobs_dataset = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/european_jobs_dataset.csv'
 df = pd.read_csv(jobs_dataset)
 
 # --------------------
