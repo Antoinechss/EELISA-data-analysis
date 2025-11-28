@@ -3,7 +3,7 @@ import time
 import json
 from openai import OpenAI
 
-client = OpenAI(api_key="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")
+client = OpenAI()
 
 INPUT_CSV = "/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs.csv"
 OUTPUT_CSV = "/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_translated.csv"
