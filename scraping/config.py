@@ -196,9 +196,11 @@ FIELD_KEYWORDS = {
     "Mechanical & Materials Engineering": ["mechanical", 
                                            "materials", "mechanics", 
                                            "cad", "solidworks"],
-    "Electrical & Electronics Engineering": ["electrical", 
-                                             "electronics", 
-                                             "circuit", "pcb", "electronic"],
+    "Electrical & Electronics Engineering": [
+        "electrical engineer", "electronics engineer", "power electronics",
+        "hw engineer", "hardware engineer", "analog design", "fpga", "asics",
+        "electrical designer", "electrical design"
+    ],
     "Civil Engineering": ["civil engineering", "construction", "bim"],
     "Chemical & Process Engineering": ["chemical", "process engineer", 
                                        "chemistry", "process"],
