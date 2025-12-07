@@ -9,8 +9,8 @@ from tqdm import tqdm  # progress bar
 # -----------------------------
 # CONFIG
 # -----------------------------
-INPUT_CSV = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs.csv'
-OUTPUT_CSV = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_enriched.csv'
+INPUT_CSV = 'input_path'
+OUTPUT_CSV = 'output_path'
 CACHE_FILE = "inferred_fields.json"
 
 MODEL_NAME = "gpt-4.1-mini"   # most stable available to your account
@@ -36,7 +36,7 @@ else:
 # -----------------------------
 # OPENAI CLIENT
 # -----------------------------
-client = OpenAI(api_key="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")
+client = OpenAI()
 
 
 # -----------------------------
@@ -144,15 +144,14 @@ def infer_field(description):
         if field:
             cache[description] = field
             return field
-
-        print("❌ Invalid output, retrying...")
+        print("Invalid output, retrying...")
         time.sleep(1)
 
 
 # -----------------------------
-# MAIN LOOP (RESUMABLE)
+# MAIN LOOP 
 # -----------------------------
-print("🚀 Starting job field inference…")
+print("Starting job field inference…")
 
 for i in tqdm(range(len(df)), desc="Processing rows"):
     
