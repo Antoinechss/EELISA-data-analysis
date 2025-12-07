@@ -79,12 +79,11 @@ def parse_json_output(text):
 
 
 # -----------------------------
-# TRANSLATE BATCH (UNBREAKABLE)
+# TRANSLATE BATCH 
 # -----------------------------
-
 def translate_batch(text_list):
 
-    # 1. Use cached translations where possible
+    # Reuse cached translations where possible
     cached = []
     missing = []
 
@@ -113,7 +112,7 @@ def translate_batch(text_list):
                 ]
             )
         except Exception as e:
-            print("⚠️ API error, retrying in 5s:", e)
+            print("API error, retrying in 5s:", e)
             time.sleep(5)
             continue
 
@@ -126,7 +125,7 @@ def translate_batch(text_list):
             or not isinstance(results, list)
             or len(results) != len(missing)
         ):
-            print(f"❌ JSON mismatch: expected {len(missing)} got {len(results) if results else 'None'}")
+            print(f"JSON mismatch: expected {len(missing)} got {len(results) if results else 'None'}")
             print("Retrying batch...")
             time.sleep(1)
             continue
@@ -176,4 +175,4 @@ df.to_csv(OUTPUT_CSV, index=False)
 with open(CACHE_FILE, "w") as f:
     json.dump(cache, f)
 
-print("🎉 Translation of job descriptions completed successfully!")
+print("Translation of job descriptions completed successfully!")

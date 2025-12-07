@@ -1,9 +1,13 @@
+"""
+Main scraping logic with keywords used for both EURES and yenibris websites 
+"""
+
 from bs4 import BeautifulSoup
 from nuts import COUNTRY_CODE_TO_NAME, NUTS_REGIONS
 from scraping.config import DOMAIN_PATTERNS
 
 # -----------------------------
-# HTML PARSING
+# HTML PARSING LOGIC
 # -----------------------------
 
 def clean_html(html_text: str | None) -> str:
@@ -12,27 +16,21 @@ def clean_html(html_text: str | None) -> str:
     soup = BeautifulSoup(html_text, "html.parser")
     return soup.get_text(" ", strip=True)
 
-# -----------------------------
-# DOMAIN CLASSIFIER
-# -----------------------------
 
+# -----------------------------
+# DOMAIN CLASSIFIER : Later improved with GPT-4.1 mini LLM 
+# -----------------------------
 def classify_domain(title: str | None, description: str | None) -> str:
     text = (title or "").lower() + " " + (description or "").lower()
-
     for domain, patterns in DOMAIN_PATTERNS:
         if any(p in text for p in patterns):
             return domain
-
-    # Fallback: Research & Academia if clearly academic
-    if any(w in text for w in ["phd", "postdoc", "thesis", "doctoral", "university"]):
-        return "Research & Academia"
-
     return "Other / Undefined"
 
-# -----------------------------
-# Helpers 
-# -----------------------------
 
+# -----------------------------
+# Helper functions 
+# -----------------------------
 def extract_company_from_text(text: str) -> str | None:
     """
     Extracts likely company names from job descriptions using multilingual patterns.

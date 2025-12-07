@@ -1,4 +1,4 @@
-MODE = "full"
+MODE = "full" # Set to 'test' for debugging 
 
 EURES_URL = "https://europa.eu/eures/api/jv-searchengine/public/jv-search/search"
 EURES_HEADERS = {
@@ -9,52 +9,38 @@ EURES_HEADERS = {
     "Referer": "https://europa.eu/eures/portal/jv-se/search"
 }
 
-
+# turkey 'tr' parsed independently 
 COUNTRY_CODES = [
     "be", "bg", "cz", "dk", "de", "ee", "ie", "el", "es", "fr",
     "hr", "it", "cy", "lv", "lt", "lu", "hu", "mt", "nl", "at",
     "pl", "pt", "ro", "si", "sk", "fi", "se", "no", "ch"
-]
+] 
+EELISA_COUNTRIES = {"fr", "hu", "ro", "de", "it", "ch"} 
 
-EELISA_COUNTRIES = {"fr", "hu", "ro", "de", "it", "ch"}  
-
-# Limits
+# Parsing bounds 
 RESULTS_PER_PAGE = 40
 JOBS_PER_NON_EELISA_COUNTRY = 300
-JOBS_PER_EELISA_COUNTRY = 700    
+JOBS_PER_EELISA_COUNTRY = 700  # Forcing a 50% rate of EELISA countries job posts
 JOBS_PER_KEYWORD_EELISA = JOBS_PER_EELISA_COUNTRY//44
 JOBS_PER_KEYWORD_NON_EELISA = JOBS_PER_NON_EELISA_COUNTRY//44 
-REQUEST_DELAY = 0.4   
+REQUEST_DELAY = 0.4 
 
 OUTPUT_CSV = "eures_jobs_full.csv"
 
 SEARCH_KEYWORDS = [
-    # Engineering — general and specific
     "engineer", "engineering", "mechanical", "electrical", 
     "automation", "robotics", "mechatronics",
-
-    # Digital & Computing
     "software", "developer", "programmer", 
     "cloud", "devops", "cybersecurity", "network",
-
-    # Data, AI & ML
     "data", "data science", "data analyst", 
     "machine learning", "ai", "artificial intelligence",
     "deep learning",
-
-    # Research & Academia
     "research", "scientist", "laboratory", 
     "PhD", "postdoc", "quantitative", "mathematics",
-
-    # Sustainability & Green Transition
     "sustainability", "renewable", "solar", 
     "wind", "energy", "environmental", "climate",
-
-    # Industry & Advanced Manufacturing
     "manufacturing", "industrial", "quality",
     "chemistry", "materials", "biomedical",
-
-    # Business & Innovation
     "innovation", "product manager", "project manager",
 ]
 

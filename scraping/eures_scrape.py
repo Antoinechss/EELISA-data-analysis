@@ -1,3 +1,7 @@
+"""
+This file retrieves job postings from the EURES job portal 
+"""
+
 import requests
 import pandas as pd
 import time
@@ -15,7 +19,6 @@ from scraping.config import (MODE,
                     JOBS_PER_NON_EELISA_COUNTRY,
                     REQUEST_DELAY,
                     OUTPUT_CSV,
-                    DOMAIN_PATTERNS,
                     SEARCH_KEYWORDS)
 from scraping.scraping_logic import (
     clean_html,
@@ -28,7 +31,6 @@ from scraping.scraping_logic import (
 # -----------------------------
 # CONFIGS
 # -----------------------------
-
 if MODE == "test":
     print("\n=== RUNNING IN TEST MODE ===\n")
     SELECTED_COUNTRIES = ["cz"]     
@@ -38,10 +40,10 @@ else:
     SELECTED_COUNTRIES = COUNTRY_CODES
     SELECTED_KEYWORDS = SEARCH_KEYWORDS
 
+
 # -----------------------------
 # CORE SCRAPING LOGIC
 # -----------------------------
-
 def fetch_page(country_code: str | None,
                keyword: str,
                page: int,
@@ -161,10 +163,10 @@ def fetch_jobs_for_country(country_code: str,
     return all_jobs
 
 
+
 # -----------------------------
 # MAIN
 # -----------------------------
-
 def save_results(existing_df, all_rows):
     """
     Saves current CSV when scraping interrupted mid run 

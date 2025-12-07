@@ -1,3 +1,7 @@
+"""
+This file retrieves Turkish job posts from the Yenibris website 
+"""
+
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -7,13 +11,12 @@ from config import SEARCH_KEYWORDS_TR
 BASE_URL = "https://www.yenibiris.com/is-ilanlari"
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 
-# Target count 
 TARGET_TURKEY = 700
 JOBS_PER_KEYWORD = 15
 
-# ============================================================
-# SCRAPE ONE KEYWORD
-# ============================================================
+# -----------------------------
+# SCRAPE ONE KEYWORD 
+# -----------------------------
 def scrape_keyword(keyword, max_per_keyword=JOBS_PER_KEYWORD):
     print(f"\n=== SCRAPING KEYWORD: {keyword} ===")
     all_jobs = []
@@ -72,11 +75,9 @@ def scrape_keyword(keyword, max_per_keyword=JOBS_PER_KEYWORD):
     print(f"Collected {len(all_jobs)} jobs for '{keyword}'\n")
     return all_jobs
 
-
-# ============================================================
-# SCRAPE ALL KEYWORDS
-# ============================================================
-
+# -----------------------------
+# SCRAPE ALL KEYWORDS 
+# -----------------------------
 def scrape_all_keywords(keywords):
     all_results = []
     for kw in keywords:
@@ -88,44 +89,26 @@ def scrape_all_keywords(keywords):
     return df
 
 
-# ============================================================
-# MAIN
-# ============================================================
+# -----------------------------
+# MAIN LOOP
+# -----------------------------
 if __name__ == "__main__":
 
-    # 1. Scrape all Turkish keywords
     df = scrape_all_keywords(SEARCH_KEYWORDS_TR)
     df = df.drop_duplicates(subset=["url"])
     current_count = len(df)
 
-    print(f"\nAfter keyword scraping: {current_count} jobs")
-    print(f"Target was: {TARGET_TURKEY}")
-
-    # 2. If still under target, try to fill in with "mühendis"
     remaining = TARGET_TURKEY - current_count
 
     if remaining > 0:
-        print(f"\n=== Attempting to fill {remaining} more jobs with 'mühendis' ===\n")
-
         existing_urls = set(df["url"])
-
-        # Scrape mühendis only once (we won't loop infinitely)
         extra_jobs = scrape_keyword("mühendis", max_per_keyword=remaining)
-
-        # Filter only NEW URLs
         filtered = [job for job in extra_jobs if job["url"] not in existing_urls]
-
-        print(f"Found {len(filtered)} NEW mühendis jobs")
-
         if len(filtered) > 0:
             df = pd.concat([df, pd.DataFrame(filtered)], ignore_index=True)
             df = df.drop_duplicates(subset=["url"])
 
-    # 3. Final result (may be < 700 if insufficient jobs exist)
-    final_count = len(df)
-    print(f"\n🎯 FINAL JOB COUNT FOR TURKEY: {final_count} jobs (target was 700)")
-    print("If fewer than 700 jobs were found, that is acceptable.\n")
+    # Save to output 
 
-    # 4. Save output
     df.to_csv("turkey_yenibiris_all_keywords.csv", index=False)
     print("Saved to turkey_yenibiris_all_keywords.csv")
