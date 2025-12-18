@@ -1,8 +1,8 @@
-from nuts import NUTS_REGIONS, NUTS_COORDINATES
+from scraping.nuts import NUTS_REGIONS, NUTS_COORDINATES
 import pandas as pd
 
-jobs_dataset = 'input_path'
-output_path = 'output_path'
+jobs_dataset = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/scraping/eures_jobs_deduped.csv'
+output_path = 'dataset_with_coords.csv'
 df = pd.read_csv(jobs_dataset)
 
 def get_region_code(region_name):
