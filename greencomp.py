@@ -1,0 +1,17 @@
+# GreenComp Competence framework : 4 domains and 12 competences 
+GREENCOMP_FRAMEWORK = [("Embodying sustainability values",
+                        ["Valuing sustainability",
+                         "Supporting fairness",
+                         "Promoting nature"]),
+                       ("Embracing complexity in sustainability",
+                        ["Systems thinking",
+                         "Problem framing",
+                         "Critical thinking"]),
+                       ("Envisioning sustainable futures",
+                        ["Futures literacy",
+                         "Adaptability",
+                         "Exploratory thinking"]),
+                       ("Acting for sustainability",
+                        ["Political agency",
+                         "Collective action",
+                         "Individual initiative"])]
