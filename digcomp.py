@@ -24,11 +24,3 @@ DIGCOMP_FRAMEWORK = [("Information and digital literacy",
                        "Creatively using digital technologies", 
                        "Identifying digital competence gaps"])
 ]
-
-
-
-
-
-
-
-

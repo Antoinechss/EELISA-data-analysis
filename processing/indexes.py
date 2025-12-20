@@ -1,6 +1,6 @@
 import pandas as pd
 
-path = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_translated_fixed.csv'
+path = '/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_merged.csv'
 df = pd.read_csv(path)
 
 # --------------------

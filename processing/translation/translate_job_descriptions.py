@@ -16,18 +16,24 @@ load_dotenv()
 # Use the environment variable
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-INPUT_CSV = "/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs.csv"
-OUTPUT_CSV = "/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_translated_descriptions.csv"
-CACHE_FILE = "description_translation_cache.json"
+# CHANGE: Update input and output paths
+INPUT_CSV = "/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_2.csv"
+OUTPUT_CSV = "/Users/antoinechosson/Desktop/EELISA/EELISA-Data-analysis/datasets/european_jobs_2_translated.csv"
+CACHE_FILE = "description_translation_cache_v2.json"  # CHANGE: Different cache file
 
-BATCH_SIZE = 5   # safe for gpt-4.1-mini
-
+BATCH_SIZE = 5   # safe for gpt-4o-mini  # CHANGE: Fix model name
 
 # -----------------------------
 # LOAD DATA + CACHE
 # -----------------------------
 
 df = pd.read_csv(INPUT_CSV)
+
+# CHANGE: Check if description column exists and what it's called
+if "full_description" not in df.columns:
+    print("Available columns:", df.columns.tolist())
+    print("ERROR: 'full_description' column not found!")
+    exit()
 
 if "job_description_translated" not in df.columns:
     df["job_description_translated"] = ""
@@ -88,7 +94,6 @@ def parse_json_output(text):
 # TRANSLATE BATCH 
 # -----------------------------
 def translate_batch(text_list):
-
     # Reuse cached translations where possible
     cached = []
     missing = []
@@ -107,11 +112,17 @@ def translate_batch(text_list):
     # Build the numbered input for missing items
     user_input = "\n".join([f"{i+1}. {t}" for i, t in enumerate(missing)])
 
+    # Add debug: show what we're sending
+    print(f"Translating {len(missing)} items:")
+    for i, item in enumerate(missing):
+        print(f"  {i+1}. {item[:50]}...")
+
     # Retry loop
-    while True:
+    retry_count = 0
+    while retry_count < 3:  # Limit retries
         try:
             response = client.chat.completions.create(
-                model="gpt-4.1-mini",
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": user_input}
@@ -123,6 +134,12 @@ def translate_batch(text_list):
             continue
 
         text = response.choices[0].message.content.strip()
+        
+        # DEBUG: Show raw response
+        print(f"Raw API response ({len(text)} chars):")
+        print(text[:200] + "..." if len(text) > 200 else text)
+        print("="*50)
+        
         results = parse_json_output(text)
 
         # If JSON invalid, retry
@@ -131,10 +148,15 @@ def translate_batch(text_list):
             or not isinstance(results, list)
             or len(results) != len(missing)
         ):
-            print(f"JSON mismatch: expected {len(missing)} got {len(results) if results else 'None'}")
-            print("Retrying batch...")
-            time.sleep(1)
-            continue
+            retry_count += 1
+            print(f"JSON mismatch (attempt {retry_count}): expected {len(missing)} got {len(results) if results else 'None'}")
+            if retry_count < 3:
+                print("Retrying batch...")
+                time.sleep(2)
+                continue
+            else:
+                print("Max retries reached. Skipping batch.")
+                return ["[TRANSLATION_FAILED]"] * len(text_list)
 
         # Valid JSON and correct size → break retry loop
         break
