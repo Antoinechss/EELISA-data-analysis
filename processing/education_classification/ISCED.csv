@@ -1,0 +1,29 @@
+Broad field code,Broad field name,Narrow field code,Narrow field name,Detailed field code,Detailed field name
+05,Natural sciences, mathematics and statistics,051,Biological and related sciences,0511,Biology
+05,Natural sciences, mathematics and statistics,051,Biological and related sciences,0512,Biochemistry
+05,Natural sciences, mathematics and statistics,052,Environment,0521,Environmental sciences
+05,Natural sciences, mathematics and statistics,052,Environment,0522,Natural environments and wildlife
+05,Natural sciences, mathematics and statistics,053,Physical sciences,0531,Chemistry
+05,Natural sciences, mathematics and statistics,053,Physical sciences,0532,Earth sciences
+05,Natural sciences, mathematics and statistics,053,Physical sciences,0533,Physics
+05,Natural sciences, mathematics and statistics,054,Mathematics and statistics,0541,Mathematics
+05,Natural sciences, mathematics and statistics,054,Mathematics and statistics,0542,Statistics
+06,Information and Communication Technologies,061,Information and Communication Technologies,0611,Computer use
+06,Information and Communication Technologies,061,Information and Communication Technologies,0612,Database and network design and administration
+06,Information and Communication Technologies,061,Information and Communication Technologies,0613,Software and applications development and analysis
+07,Engineering, manufacturing and construction,071,Engineering and engineering trades,0711,Chemical engineering and processes
+07,Engineering, manufacturing and construction,071,Engineering and engineering trades,0712,Environmental protection technology
+07,Engineering, manufacturing and construction,071,Engineering and engineering trades,0713,Electricity and energy
+07,Engineering, manufacturing and construction,071,Engineering and engineering trades,0714,Electronics and automation
+07,Engineering, manufacturing and construction,071,Engineering and engineering trades,0715,Mechanics and metal trades
+07,Engineering, manufacturing and construction,071,Engineering and engineering trades,0716,Motor vehicles, ships and aircraft
+07,Engineering, manufacturing and construction,072,Manufacturing and processing,0721,Food processing
+07,Engineering, manufacturing and construction,072,Manufacturing and processing,0722,Materials (glass, paper, plastic and wood)
+07,Engineering, manufacturing and construction,072,Manufacturing and processing,0723,Textiles (clothes, footwear and leather)
+07,Engineering, manufacturing and construction,072,Manufacturing and processing,0724,Mining and extraction
+07,Engineering, manufacturing and construction,073,Architecture and construction,0731,Architecture and town planning
+07,Engineering, manufacturing and construction,073,Architecture and construction,0732,Building and civil engineering
+08,Agriculture, forestry, fisheries and veterinary,081,Agriculture,0811,Crop and livestock production
+08,Agriculture, forestry, fisheries and veterinary,082,Forestry,0821,Forestry
+08,Agriculture, forestry, fisheries and veterinary,083,Fisheries,0831,Fisheries
+10,Services,104,Transport services,1041,Transport services

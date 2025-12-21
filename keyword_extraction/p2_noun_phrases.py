@@ -1,6 +1,13 @@
 import spacy
-import re 
-import pandas as pd 
+import re
+import pandas as pd
+
+"""
+First gross extraction of noun phrases
+Maximum recall
+Full traceability
+One-pass extraction locked
+"""
 
 nlp = spacy.load("en_core_web_sm") # Load english version of NLP model 
 
@@ -9,6 +16,7 @@ corpus_df = pd.read_csv(corpus)
 
 # Stop noun phrases made only of stopwords / punctuation
 STOPLIKE_RE = re.compile(r"^[\W_]+$")
+
 
 def extract_noun_phrases(text: str):
     doc = nlp(text)
