@@ -5,6 +5,7 @@ from pages.homepage import show_job_offers_page
 from pages.greencomp_overview import show_greencomp_page
 from pages.digcomp_overview import show_digcomp_page
 from pages.digital_tools import show_digital_tools_page
+from pages.digcomp_profiles import show_digcomp_profiles_page 
 from PIL import Image
 
 # Page configs 
@@ -23,7 +24,8 @@ page = st.sidebar.radio(
         "Job Offers Dataset",
         "Digital Tools Analysis",
         "DigComp",
-        "GreenComp"
+        "GreenComp", 
+        "DigComp Profiles"
     ]
 )
 
@@ -42,6 +44,10 @@ elif page == "DigComp":
 # ---- GreenComp ----
 elif page == "GreenComp":
     show_greencomp_page()
+
+# ---- DigComp Profiles ----
+elif page == "DigComp Profiles":
+    show_digcomp_profiles_page()
 
 # ---- Digital Tools ----
 ## TODO
